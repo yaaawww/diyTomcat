@@ -1,0 +1,3 @@
+# G1g4loCat
+Just a simple Tom cat.
+That's just a prototype. So many functions to be added... 
