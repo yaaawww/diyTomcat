@@ -2,14 +2,13 @@
 ### Example user template
 
 # IntelliJ project files
-.idea
+/.idea
 *.iml
-out
-gen
-!/file/
-!/lib/
-!/logs/
-!/.idea/
-!/b/
-!/G1g4loCat.iml
-!/out
+/out
+/gen
+/file/
+/lib/
+/logs/
+/.idea/
+/b/
+/G1g4loCat.iml
