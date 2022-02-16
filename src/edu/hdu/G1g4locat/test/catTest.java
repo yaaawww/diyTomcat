@@ -92,7 +92,7 @@ public class catTest {
     }
 
     private String getContentString(String uri) throws IOException {
-        String url = StrUtil.format("Http://{}:{}{}", ip, port, uri);
+        String url = StrUtil.format("http://{}:{}{}", ip, port, uri);
         String content = MiniBrowser.getContentString(url);
         return content;
     }
@@ -101,9 +101,20 @@ public class catTest {
         String http = MiniBrowser.getHttpString(url);
         return http;
     }
-
+    private byte[] getContentByte(String uri) throws IOException {
+        String url = StrUtil.format("http://{}:{}{}", ip, port, uri);
+        byte[] content = MiniBrowser.getContentBytes(url);
+        return content;
+    }
     @Test
     public void testFunction() {
         System.out.println("\t hfhakhfk ");
+    }
+
+    @Test
+    public void testPNG() throws IOException {
+        byte[] bytes = getContentByte("/test.jpg");
+        int pngFileLength = 56637;
+        Assert.assertEquals(pngFileLength, bytes.length);
     }
 }
