@@ -1,9 +1,8 @@
 package edu.hdu.G1g4locat.utils;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.FileUtil;
-import edu.hdu.G1g4locat.catalina.Context;
-import edu.hdu.G1g4locat.catalina.Engine;
-import edu.hdu.G1g4locat.catalina.Host;
+import edu.hdu.G1g4locat.catalina.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -59,6 +58,20 @@ public class ServerXMLUtil {
             String name = e.attr("name");
             Host host = new Host(name, engine);
             result.add(host);
+        }
+        return result;
+    }
+
+    public static List<Connector> getConnectors(Service service) {
+        List<Connector> result = new ArrayList<>();
+        String xml = FileUtil.readUtf8String(Constant.serverXmlFile);
+        Document d = Jsoup.parse(xml);
+        Elements es = d.select("Connector");
+        for (Element e : es) {
+            int port = Convert.toInt(e.attr("port"));
+            Connector c = new Connector(service);
+            c.setPort(port);
+            result.add(c);
         }
         return result;
     }
