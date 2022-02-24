@@ -117,4 +117,9 @@ public class catTest {
         int pngFileLength = 56637;
         Assert.assertEquals(pngFileLength, bytes.length);
     }
+    @Test
+    public void testhello() throws IOException {
+        String html = getContentString("/hello");
+        Assert.assertEquals(html,"Hello, Servlet!");
+    }
 }

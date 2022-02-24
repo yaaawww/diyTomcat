@@ -9,6 +9,7 @@ import edu.hdu.G1g4locat.http.Request;
 import edu.hdu.G1g4locat.http.Response;
 import edu.hdu.G1g4locat.utils.Constant;
 import edu.hdu.G1g4locat.utils.WebXMLUtil;
+import edu.hdu.G1g4locat.webappservlet.HelloServlet;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,24 +30,29 @@ public class HttpProcessor {
                 throw new Exception("this is a test500.");
             }
 
-            if ("/".equals(uri))
-                uri = WebXMLUtil.getWelcomeFile(request.getContext());
-
-            String filename = StrUtil.removePrefix(uri, "/");
-            File file = FileUtil.file(context.getDocBase(), filename);
-            if (file.exists()) {
-                String extName = FileUtil.extName(file);
-                String mimeType = WebXMLUtil.getMimeType(extName);
-                response.setContentType(mimeType);
-                byte[] body = FileUtil.readBytes(file);
-                response.setBody(body);
-
-                if (filename.equals("timeConsume.html")) {
-                    ThreadUtil.sleep(1000);
-                }
+            if ("/hello".equals(uri)) {
+                HelloServlet helloServlet = new HelloServlet();
+                helloServlet.doGet(request, response);
             } else {
-                handle404(s, uri);
-                return;
+                if ("/".equals(uri))
+                    uri = WebXMLUtil.getWelcomeFile(request.getContext());
+
+                String filename = StrUtil.removePrefix(uri, "/");
+                File file = FileUtil.file(context.getDocBase(), filename);
+                if (file.exists()) {
+                    String extName = FileUtil.extName(file);
+                    String mimeType = WebXMLUtil.getMimeType(extName);
+                    response.setContentType(mimeType);
+                    byte[] body = FileUtil.readBytes(file);
+                    response.setBody(body);
+
+                    if (filename.equals("timeConsume.html")) {
+                        ThreadUtil.sleep(1000);
+                    }
+                } else {
+                    handle404(s, uri);
+                    return;
+                }
             }
             handle200(s, response);
         } catch (Exception e) {
