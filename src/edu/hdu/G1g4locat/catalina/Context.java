@@ -3,10 +3,20 @@ package edu.hdu.G1g4locat.catalina;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.log.LogFactory;
+import org.jsoup.nodes.Document;
+
+import java.io.File;
+import java.util.Map;
 
 public class Context {
     private String path;
     private String docBase;
+    private File contextWebXmlFile;
+
+    private Map<String, String> url_servletClassName;
+    private Map<String, String> url_servletName;
+    private Map<String, String> servletName_className;
+    private Map<String, String> className_servletName;
 
     public Context(String path, String docBase) {
         TimeInterval timeInterval = DateUtil.timer();
@@ -30,5 +40,13 @@ public class Context {
 
     public void setDocBase(String docBase) {
         this.docBase = docBase;
+    }
+
+    private void parseServletMapping(Document d) {
+
+    }
+
+    private void checkDuplicated() {
+
     }
 }

@@ -40,4 +40,5 @@ public class Constant {
             + "<p>Stacktrace:</p>" + "<pre>{}</pre>" + "<HR size='1' noshade='noshade'><h3>DiyTocmat 1.0.1</h3>"
             + "</body></html>";
     public static final File webXmlFile = new File(confFolder, "web.xml");
+    public static final File contextXmlFile = new File(confFolder, "context.xml");
 }
