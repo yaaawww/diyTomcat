@@ -122,4 +122,9 @@ public class catTest {
         String html = getContentString("/hello");
         Assert.assertEquals(html,"Hello, Servlet!");
     }
+    @Test
+    public void testhello() throws IOException {
+        String html = getContentString("/j2ee/hello");
+        Assert.assertEquals(html,"Hello, Servlet!");
+    }
 }

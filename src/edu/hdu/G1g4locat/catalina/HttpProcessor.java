@@ -3,6 +3,7 @@ package edu.hdu.G1g4locat.catalina;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.LogFactory;
 import edu.hdu.G1g4locat.http.Request;
@@ -29,10 +30,10 @@ public class HttpProcessor {
             if ("/500.html".equals(uri)) {
                 throw new Exception("this is a test500.");
             }
-
-            if ("/hello".equals(uri)) {
-                HelloServlet helloServlet = new HelloServlet();
-                helloServlet.doGet(request, response);
+            String servletClassName = context.getServletClassName(uri);
+            if (null != servletClassName) {
+                Object servletObject = ReflectUtil.newInstance(servletClassName);
+                ReflectUtil.invoke(servletObject, "doGet", request, response);
             } else {
                 if ("/".equals(uri))
                     uri = WebXMLUtil.getWelcomeFile(request.getContext());
