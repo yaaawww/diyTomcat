@@ -25,6 +25,7 @@ import java.util.Map;
 public class Request extends BaseRequest{
     private String requestString;
     private String uri;
+    private String method;
     private Socket socket;
     private Context context;
     private Service service;
@@ -35,6 +36,7 @@ public class Request extends BaseRequest{
         if(StrUtil.isEmpty(requestString))
             return;
         parseUri();
+        parseMethod();
         parseContext();
         if (!"/".equals(context.getPath())) {
             uri = StrUtil.removePrefix(uri, context.getPath());
@@ -58,6 +60,10 @@ public class Request extends BaseRequest{
         }
         temp = StrUtil.subBefore(temp, '?', false);
         uri = temp;
+    }
+
+    private void parseMethod() {
+        method = StrUtil.subBefore(requestString, " ", false);
     }
 
     public String getUri() {
@@ -85,5 +91,10 @@ public class Request extends BaseRequest{
         context = engine.getDefaultHost().getContext(path);
         if (null == context)
             context = engine.getDefaultHost().getContext("/");
+    }
+
+    @Override
+    public String getMethod() {
+        return method;
     }
 }
