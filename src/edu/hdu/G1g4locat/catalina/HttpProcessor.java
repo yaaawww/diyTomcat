@@ -8,6 +8,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.LogFactory;
 import edu.hdu.G1g4locat.http.Request;
 import edu.hdu.G1g4locat.http.Response;
+import edu.hdu.G1g4locat.servlets.InvokerServlet;
 import edu.hdu.G1g4locat.utils.Constant;
 import edu.hdu.G1g4locat.utils.WebXMLUtil;
 import edu.hdu.G1g4locat.webappservlet.HelloServlet;
@@ -32,8 +33,7 @@ public class HttpProcessor {
             }
             String servletClassName = context.getServletClassName(uri);
             if (null != servletClassName) {
-                Object servletObject = ReflectUtil.newInstance(servletClassName);
-                ReflectUtil.invoke(servletObject, "doGet", request, response);
+                InvokerServlet.getInstance().service(request, response);
             } else {
                 if ("/".equals(uri))
                     uri = WebXMLUtil.getWelcomeFile(request.getContext());

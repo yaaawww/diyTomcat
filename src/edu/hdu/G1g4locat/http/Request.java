@@ -5,19 +5,9 @@ import edu.hdu.G1g4locat.catalina.Context;
 import edu.hdu.G1g4locat.catalina.Engine;
 import edu.hdu.G1g4locat.catalina.Service;
 import edu.hdu.G1g4locat.utils.MiniBrowser;
-
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.Socket;
-import java.security.Principal;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * 对Request请求数据进行封装处理
