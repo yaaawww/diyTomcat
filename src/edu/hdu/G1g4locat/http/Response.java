@@ -48,4 +48,14 @@ public class Response extends BaseResponse {
     public void setBody(byte[] body) {
         this.body = body;
     }
+
+    private int status;
+    @Override
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    @Override
+    public int getStatus() {
+        return status;
+    }
 }

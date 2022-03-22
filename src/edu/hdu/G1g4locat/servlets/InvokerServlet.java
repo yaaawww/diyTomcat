@@ -5,6 +5,7 @@ import edu.hdu.G1g4locat.catalina.Context;
 import edu.hdu.G1g4locat.http.Request;
 import edu.hdu.G1g4locat.http.Response;
 import edu.hdu.G1g4locat.utils.Constant;
+import org.apache.tomcat.util.bcel.Const;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,5 +29,6 @@ public class InvokerServlet extends HttpServlet {
 
         Object servletObject = ReflectUtil.newInstance(servletClassName);
         ReflectUtil.invoke(servletObject, "service", request, response);
+        response.setStatus(Constant.CODE_200);
     }
 }
